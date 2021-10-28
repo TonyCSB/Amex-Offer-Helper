@@ -7,6 +7,7 @@
 // @include      https://global.americanexpress.com/offers/eligible
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
+// @license      GPL
 // ==/UserScript==
 
 
