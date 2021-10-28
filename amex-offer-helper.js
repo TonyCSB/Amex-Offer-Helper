@@ -1,13 +1,12 @@
 // ==UserScript==
 // @name         Amex Offer Helper
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Helps you add American Express Offer easily
 // @author       Tony Chen
 // @include      https://global.americanexpress.com/offers/eligible
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
-// @license      GPL
 // ==/UserScript==
 
 
@@ -78,6 +77,23 @@ function addCheckbox() {
     });
 }
 
+function cardSwitchMonitor() {
+    checkElement(".axp-account-switcher__accountSwitcher__togglerButton___1H_zk").then(switcher => {
+        switcher.addEventListener("click", e => {
+            console.log("accountSwitcher clicked")
+            checkElement("#accounts").then(acc => {
+                acc.addEventListener("click", e => {
+                    console.log("card changed")
+                    checkElement(".card-block.border-b").then(_ => {
+                        addCheckbox();
+                        cardSwitchMonitor();
+                    });
+                });
+            });
+        });
+    });
+}
+
 (function() {
     'use strict';
 
@@ -91,5 +107,7 @@ function addCheckbox() {
         checkElement(".card-block.border-b").then(_ => {
             addCheckbox();
         });
+
+        cardSwitchMonitor();
     });
 })();
