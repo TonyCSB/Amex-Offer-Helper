@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amex Offer Helper
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Helps you add American Express Offer easily
 // @author       Tony Chen
 // @match        https://global.americanexpress.com/*
@@ -35,7 +35,7 @@ async function addAllOffers() {
     let btns;
     var index;
     if (checked.length == 0) {
-        btns = [...document.querySelectorAll(".btn.btn-sm.btn-fluid.offer-cta.btn-secondary")].filter(btn => btn.title == "Add to Card");
+        btns = [...document.querySelectorAll(".btn.btn-sm.btn-fluid.offer-cta.btn-secondary")].filter(btn => btn.title == "Add to Card" || btn.title == "Activate Offer");
 
         index = 0;
         for (;index < btns.length; index++) {
