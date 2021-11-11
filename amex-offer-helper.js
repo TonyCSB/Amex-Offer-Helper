@@ -4,7 +4,7 @@
 // @version      0.2
 // @description  Helps you add American Express Offer easily
 // @author       Tony Chen
-// @include      https://global.americanexpress.com/offers/eligible
+// @match        https://global.americanexpress.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==
@@ -94,7 +94,18 @@ function cardSwitchMonitor() {
     });
 }
 
-(function() {
+let amexOfferUrl = "https://global.americanexpress.com/offers/eligible";
+let lastUrl = "";
+new MutationObserver(() => {
+    const url = location.href;
+    if (url === amexOfferUrl && url !== lastUrl) {
+        runHelper();
+        lastUrl = url;
+    }
+    lastUrl = url;
+}).observe(document, { attributes: true, childList: true, subtree: true });
+
+function runHelper() {
     'use strict';
 
     checkElement("#offers > div span").then(title => {
@@ -110,4 +121,4 @@ function cardSwitchMonitor() {
 
         cardSwitchMonitor();
     });
-})();
+}
