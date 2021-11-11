@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amex Offer Helper
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      1.0
 // @description  Helps you add American Express Offer easily
 // @author       Tony Chen
 // @match        https://global.americanexpress.com/*
