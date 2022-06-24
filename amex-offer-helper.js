@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amex Offer Helper
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Helps you add American Express Offer easily
 // @author       Tony Chen
 // @match        https://global.americanexpress.com/*
@@ -35,7 +35,7 @@ async function addAllOffers() {
     let btns;
     var index;
     if (checked.length == 0) {
-        btns = [...document.querySelectorAll(".btn.btn-sm.btn-fluid.offer-cta.btn-secondary")].filter(btn => btn.title == "Add to Card" || btn.title == "Activate Offer");
+        btns = [...document.querySelectorAll("button")].filter(btn => btn.title == "Add to Card" || btn.title == "Activate Offer");
 
         index = 0;
         for (;index < btns.length; index++) {
@@ -45,7 +45,7 @@ async function addAllOffers() {
     } else {
         index = 0;
         for(;index< checked.length; index++) {
-            checked[index].parentElement.parentElement.querySelector(".btn").click();
+            checked[index].parentElement.parentElement.parentElement.querySelector("button").click();
             await new Promise(r => setTimeout(r, TIMEOUT));
         }
     }
@@ -53,7 +53,7 @@ async function addAllOffers() {
 }
 
 function addCheckbox() {
-    let rows = [...document.querySelectorAll(".card-block.border-b, .card-block.border-0-b")].filter(r => r.querySelector(".btn.btn-sm.btn-fluid.offer-cta.btn-secondary").title == "Add to Card");
+    let rows = [...document.querySelectorAll(".border-b")].filter(r => r.querySelector("button").title == "Add to Card" || r.querySelector("button").title == "Activate Offer");
     rows.forEach((offer, idx) => {
         let name = "user_select_offer_" + idx;
         let row = offer.querySelector(".row");
@@ -84,7 +84,7 @@ function cardSwitchMonitor() {
             checkElement("#accounts").then(acc => {
                 acc.addEventListener("click", e => {
                     console.log("card changed")
-                    checkElement(".card-block.border-b").then(_ => {
+                    checkElement(".border-b").then(_ => {
                         addCheckbox();
                         cardSwitchMonitor();
                     });
@@ -115,7 +115,7 @@ function runHelper() {
         addAllBtn.addEventListener("click", addAllOffers)
         title.appendChild(addAllBtn);
 
-        checkElement(".card-block.border-b").then(_ => {
+        checkElement(".border-b").then(_ => {
             addCheckbox();
         });
 
