@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Amex Offer Helper
+// @name         [DEPRECATED]Amex Offer Helper
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Helps you add American Express Offer easily
 // @author       Tony Chen
 // @match        https://global.americanexpress.com/*
@@ -38,13 +38,13 @@ async function addAllOffers() {
         btns = [...document.querySelectorAll("button")].filter(btn => btn.title == "Add to Card" || btn.title == "Activate Offer");
 
         index = 0;
-        for (;index < btns.length; index++) {
+        for (; index < btns.length; index++) {
             btns[index].click();
             await new Promise(r => setTimeout(r, TIMEOUT));
         }
     } else {
         index = 0;
-        for(;index< checked.length; index++) {
+        for (; index < checked.length; index++) {
             checked[index].parentElement.parentElement.parentElement.querySelector("button").click();
             await new Promise(r => setTimeout(r, TIMEOUT));
         }
@@ -103,7 +103,11 @@ new MutationObserver(() => {
         lastUrl = url;
     }
     lastUrl = url;
-}).observe(document, { attributes: true, childList: true, subtree: true });
+}).observe(document, {
+    attributes: true,
+    childList: true,
+    subtree: true
+});
 
 function runHelper() {
     'use strict';

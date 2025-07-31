@@ -1,4 +1,6 @@
-# Amex-Offer-Helper
+# [DEPRECATED] Amex-Offer-Helper
+
+## This script no longer works after Amex updated their UI. You are more than welcomed to fork the repo and fix the problem
 
 This is a Greasy Fork script helping you to add your favorite Amex Offer faster!
 
@@ -17,4 +19,3 @@ This is a Greasy Fork script helping you to add your favorite Amex Offer faster!
 ### Add all offers
 
 ![Screen Shot 2021-10-28 at 06 14 23](https://user-images.githubusercontent.com/21008477/139237170-14d9d926-fe4d-4e29-a9ed-68c154a4519b.png)
-
